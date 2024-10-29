@@ -37,6 +37,16 @@ public class APIClient {
         return httpClient.send(testOutcome, new JsonBodyHandler<>(OutcomeDTO.class));
     }
 
+    public HttpResponse<OutcomeDTO> getOngoingOutcome() throws Exception{
+        HttpRequest testOutcome = HttpRequest.newBuilder(
+                        URI.create(BACKEND_HOST + "/ongoing"))
+                .header("Content-Type", "application/json")
+                .GET()
+                .build();
+
+        return httpClient.send(testOutcome, new JsonBodyHandler<>(OutcomeDTO.class));
+    }
+
     // A test on "/ongoing"
 
 

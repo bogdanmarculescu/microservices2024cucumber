@@ -25,6 +25,13 @@ public class Round {
         return this.outcomeDTO;
     }
 
+    public OutcomeDTO callOngoingEndpoint() throws Exception{
+        HttpResponse<OutcomeDTO> outcome = apiClient.getTestOutcome();
+        assertThat(outcome.statusCode()).isEqualTo(200);
+        this.outcomeDTO = outcome.body();
+        return this.outcomeDTO;
+    }
+
     public OutcomeDTO getOutcomeDTO() {
         return outcomeDTO;
     }

@@ -16,10 +16,13 @@ public class RoundsStepDefinitions {
         this.round = new Round(word);
     }
 
-    @When("(s)he calls the endpoint to test")
-    public void calls_the_endpoint_to_test() throws Exception {
+    @When("(s)he calls the {word} endpoint to test")
+    public void calls_the_endpoint_to_test(String word) throws Exception {
         // someone maybe ought to call that endpoint - round
-        round.callTestEndpoint();
+        if(word.equals("ongoing")){
+            round. callOngoingEndpoint();
+        }
+        else round.callTestEndpoint();
     }
 
     @Then("(s)he gets a test outcome")
@@ -27,6 +30,14 @@ public class RoundsStepDefinitions {
         // check that round has the correct outcome
         assertThat(round.getOutcomeDTO().getOutcomeId())
                 .isEqualTo(42);
+
+    }
+
+    @Then("(s)he gets a test outcome with id {long}")
+    public void gets_a_test_outcome(Long id) {
+        // check that round has the correct outcome
+        assertThat(round.getOutcomeDTO().getOutcomeId())
+                .isEqualTo(id);
 
     }
 }
